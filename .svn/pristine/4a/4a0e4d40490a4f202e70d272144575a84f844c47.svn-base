@@ -1,0 +1,52 @@
+<%@page import="fr.uha.ensisa.gl.BBRtesting.modele.Etape"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="fr.uha.ensisa.gl.BBRtesting.modele.TestCase"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form method="get" action="ExecuterTests.jsp">
+
+
+		<table border=1 style="width: 80%; height: auto;">
+		<%
+		TestCase ta=new TestCase();
+		for(TestCase tc: TestCase.ltc)
+		{
+		   if(tc.getId()==request.getParameter("id"))
+		   {
+		   ta =tc;
+		   break;
+		   }
+		}
+		ArrayList<Etape> le= ta.getEtapes();
+		for(Etape e:le)
+		{
+		%>
+         <tr>
+			<label for="titre"> Titre: <%=e.getTitre()%>
+			</label>
+			<label for="description"> Description: <%=e.getDescription()%>
+			</label>
+
+
+
+			<label for="commentaire"> Commentaire: 
+			</label><textarea
+					name="textarea">contenu</textarea>
+			<button name = "Success" value="<%=e.getId()%>">Success</button>
+			<button name="Failed" value="<%=e.getId() %>">Failed</button>
+			</tr>
+			<%
+			}
+			 %>
+		</table>
+	</form>
+
+</body>
+</html>
